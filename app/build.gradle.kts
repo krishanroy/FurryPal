@@ -47,6 +47,8 @@ dependencies {
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.material3.android)
     implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.square.retrofit)
+    implementation(libs.google.gson.converter)
     implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
