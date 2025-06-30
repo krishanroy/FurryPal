@@ -1,6 +1,6 @@
 package com.krishan.furrypal.data
 
-sealed class DogsResponseDto {
+sealed class FurryResponseDto {
     data class DogsResponse(val message: Map<String, List<String>>, val status: String)
     data class DogAllImagesFromBreedResponse(val message: List<String>, val status: String)
     data class DogSubBreedResponse(val message: List<String>, val status: String)

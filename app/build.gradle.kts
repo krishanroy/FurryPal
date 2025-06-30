@@ -45,12 +45,15 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.material3.android)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.square.retrofit)
-    implementation(libs.google.gson.converter)
     implementation(libs.androidx.activity)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    // new libs added
+    implementation(libs.androidx.material3.android)
+    implementation(platform(libs.androidx.compose.bom))
+    implementation(libs.square.retrofit)
+    implementation(libs.google.gson.converter)
+    implementation(libs.androidx.compose.viewmodel)
 }
