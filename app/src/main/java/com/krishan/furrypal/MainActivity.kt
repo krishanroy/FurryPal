@@ -16,6 +16,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.krishan.furrypal.ui.HomeScreen
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.Companion.padding(innerPadding),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    Text("Furry Home Page")
+                    HomeScreen()
                 }
             }
         }
