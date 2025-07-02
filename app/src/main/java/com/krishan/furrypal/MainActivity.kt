@@ -16,13 +16,20 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.krishan.furrypal.ui.HomeScreen
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.krishan.furrypal.ui.details.DetailScreen
+import com.krishan.furrypal.ui.home.HomeScreen
+import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            val navController: NavHostController = rememberNavController()
             Scaffold(
                 modifier = Modifier.Companion.fillMaxSize(),
                 topBar = {
@@ -40,9 +47,25 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.Companion.padding(innerPadding),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
-                    HomeScreen()
+                    NavHost(navController = navController, startDestination = Screen.Home) {
+                        composable<Screen.Home> {
+                            HomeScreen(navController = navController)
+                        }
+                        composable<Screen.Details> {
+                            DetailScreen(navController = navController)
+                        }
+                    }
                 }
             }
         }
     }
+}
+
+
+sealed class Screen() {
+    @Serializable
+    object Home : Screen()
+
+    @Serializable
+    data class Details(val breedName: String) : Screen()
 }
