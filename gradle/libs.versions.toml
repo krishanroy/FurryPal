@@ -15,6 +15,9 @@ activity = "1.10.1"
 retrofit = "3.0.0"
 gson = "2.9.0"
 composeViewModel = "2.9.1"
+navigationCompose = "2.9.0"
+serialization = "1.7.3"
+coilCompose = "2.7.0"
 
 [libraries]
 # Given by default when you open an empty project
@@ -34,13 +37,20 @@ androidx-activity = { group = "androidx.activity", name = "activity", version.re
 # calling viewModel() inside @Composable functions
 androidx_compose_viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "composeViewModel" }
 
+# compose navigation
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
+
 # remote data fetching (Retrofit/Gson)
 square_retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
 google_gson_converter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "gson" }
+
+# for image rendering
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
-
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
