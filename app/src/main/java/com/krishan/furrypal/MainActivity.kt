@@ -21,7 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.krishan.furrypal.ui.details.DetailScreen
-import com.krishan.furrypal.ui.home.HomeScreen
+import com.krishan.furrypal.ui.home.components.HomeScreen
 import kotlinx.serialization.Serializable
 
 class MainActivity : ComponentActivity() {

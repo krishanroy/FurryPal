@@ -1,4 +1,4 @@
-package com.krishan.furrypal.data
+package com.krishan.furrypal.data.remote
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
