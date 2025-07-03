@@ -8,12 +8,12 @@ interface FurryService {
     @GET("api/breeds/list/all")
     suspend fun getAllBreeds(): Response<FurryResponseDto.DogsResponse>
 
-    @GET("breed/{breed}/images")
+    @GET("api/breed/{breed}/images")
     suspend fun getImagesByBreed(@Path("breed") breed: String): Response<FurryResponseDto.DogAllImagesFromBreedResponse>
 
-    @GET("breed/{sub_breed}/images")
+    @GET("api/breed/{sub_breed}/images")
     suspend fun getImagesBySubBreed(@Path("sub_breed") subBreed: String): Response<FurryResponseDto.DogSubBreedResponse>
 
-    @GET("breeds/image/random")
+    @GET("api/breeds/image/random")
     suspend fun getRandomImage(): Response<FurryResponseDto.DogRandomImage>
 }
