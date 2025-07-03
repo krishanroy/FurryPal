@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -26,6 +25,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.toRoute
 import coil.compose.AsyncImage
 import com.krishan.furrypal.Screen
+import com.krishan.furrypal.ui.common.LoadingIndicator
 
 @Composable
 fun DetailScreen(navController: NavHostController) {
@@ -36,9 +36,7 @@ fun DetailScreen(navController: NavHostController) {
 
     when (imageUrlStateFlow) {
         is DetailsStateUi.Loading -> {
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator()
-            }
+            LoadingIndicator()
         }
 
         is DetailsStateUi.Error -> {
