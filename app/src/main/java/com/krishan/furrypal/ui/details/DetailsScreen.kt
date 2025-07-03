@@ -32,9 +32,12 @@ fun DetailScreen(navController: NavHostController) {
                 shape = RoundedCornerShape(12.dp), color = Color.LightGray,
                 modifier = Modifier
                     .padding(16.dp)
-                    .size(75.dp)
+                    .size(275.dp)
             ) {
-                //AsyncImage()
+                AsyncImage(
+                    model = "https://images.dog.ceo/breeds/hound-afghan/n02088094_1003.jpg",
+                    contentDescription = "test image"
+                )
             }
             Text(
                 breedName,

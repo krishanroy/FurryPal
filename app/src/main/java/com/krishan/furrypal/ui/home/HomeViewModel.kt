@@ -1,9 +1,9 @@
-package com.krishan.furrypal.domain
+package com.krishan.furrypal.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.krishan.furrypal.data.FurryService
-import com.krishan.furrypal.data.RetrofitSingleton
+import com.krishan.furrypal.data.remote.FurryService
+import com.krishan.furrypal.data.remote.RetrofitSingleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch

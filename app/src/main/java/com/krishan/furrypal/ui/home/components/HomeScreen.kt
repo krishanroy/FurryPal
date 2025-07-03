@@ -1,4 +1,4 @@
-package com.krishan.furrypal.ui.home
+package com.krishan.furrypal.ui.home.components
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import com.krishan.furrypal.domain.HomeViewModel
+import com.krishan.furrypal.ui.home.HomeViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {

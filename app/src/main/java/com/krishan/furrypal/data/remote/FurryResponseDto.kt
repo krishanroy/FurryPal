@@ -1,4 +1,4 @@
-package com.krishan.furrypal.data
+package com.krishan.furrypal.data.remote
 
 sealed class FurryResponseDto {
     data class DogsResponse(val message: Map<String, List<String>>, val status: String)
