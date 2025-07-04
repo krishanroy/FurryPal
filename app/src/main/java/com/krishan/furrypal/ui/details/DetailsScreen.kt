@@ -1,7 +1,7 @@
 package com.krishan.furrypal.ui.details
 
 import android.widget.Toast
-import androidx.compose.foundation.clickable
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -21,24 +20,28 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.toRoute
 import coil.compose.AsyncImage
-import com.krishan.furrypal.Screen
+import com.krishan.furrypal.ui.Screen
+import com.krishan.furrypal.ui.common.LoadingIndicator
 
 @Composable
 fun DetailScreen(navController: NavHostController) {
     val breedName = navController.currentBackStackEntry?.toRoute<Screen.Details>()?.breedName.toString()
-    val viewModel: DetailsViewModel = viewModel()
+    val viewModel: DetailsViewModel = hiltViewModel()
     viewModel.handleIntent(intent = DetailsScreenIntent.FetchDogImage(breedName))
     val imageUrlStateFlow = viewModel.dogImageStateFlow.collectAsState().value
+    BackHandler {
+        // Perform custom actions
+        // Then, optionally call popBackStack to go back
+        navController.popBackStack()
+    }
 
     when (imageUrlStateFlow) {
         is DetailsStateUi.Loading -> {
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                CircularProgressIndicator()
-            }
+            LoadingIndicator()
         }
 
         is DetailsStateUi.Error -> {
@@ -62,12 +65,7 @@ fun DetailScreen(navController: NavHostController) {
                     Text(
                         breedName,
                         fontSize = 24.sp,
-                        fontWeight = FontWeight.Bold,
-                        modifier = Modifier.clickable(
-                            onClick = {
-                                navController.popBackStack()
-                            }
-                        )
+                        fontWeight = FontWeight.Bold
                     )
                 }
             }

@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.krishan.furrypal.Screen
+import com.krishan.furrypal.ui.Screen
 
 @Composable
 fun DogsListView(dogLists: List<String>, navController: NavHostController) {

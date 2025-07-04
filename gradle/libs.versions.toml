@@ -1,5 +1,5 @@
 [versions]
-agp = "8.10.1"
+agp = "8.11.0"
 kotlin = "2.0.21"
 coreKtx = "1.16.0"
 junit = "4.13.2"
@@ -15,9 +15,17 @@ activity = "1.10.1"
 retrofit = "3.0.0"
 gson = "2.9.0"
 composeViewModel = "2.9.1"
-navigationCompose = "2.9.0"
+navigationCompose = "2.9.1"
 serialization = "1.7.3"
 coilCompose = "2.7.0"
+
+# hilt
+hiltAndroidVersion = "2.56.2"
+ksp = "2.1.21-2.0.1"
+hiltNavigationCompose = "1.2.0"
+
+# timber
+timber = "5.0.1"
 
 [libraries]
 # Given by default when you open an empty project
@@ -48,9 +56,19 @@ google_gson_converter = { group = "com.squareup.retrofit2", name = "converter-gs
 # for image rendering
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 
+# Hilt
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidVersion" }
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+
+# logging
+timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+# Hilt
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hiltAndroidVersion" }
