@@ -1,3 +1,5 @@
+import com.android.build.api.dsl.Packaging
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,11 +7,15 @@ plugins {
 
     // Must for new navigation
     alias(libs.plugins.kotlin.serialization)
+
+    // Hilt
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.hilt)
 }
 
 android {
     namespace = "com.krishan.furrypal"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.krishan.furrypal"
@@ -57,10 +63,26 @@ dependencies {
     // new libs added
     implementation(libs.androidx.material3.android)
     implementation(platform(libs.androidx.compose.bom))
+
+    // Retrofit
     implementation(libs.square.retrofit)
     implementation(libs.google.gson.converter)
+
+    // Compose viewModel
     implementation(libs.androidx.compose.viewmodel)
+
+    // Navigation Compose
     implementation(libs.androidx.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
+
+    // Image Rendering
     implementation(libs.coil.compose)
+
+    // Hilt
+    ksp(libs.hilt.android.compiler)
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Logging
+    implementation(libs.timber)
 }
