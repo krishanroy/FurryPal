@@ -2,14 +2,15 @@ package com.krishan.furrypal.ui.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.krishan.furrypal.data.remote.FurryService
-import com.krishan.furrypal.data.remote.RetrofitSingleton
-import kotlinx.coroutines.Dispatchers
+import com.krishan.furrypal.data.repo.FurryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class DetailsViewModel : ViewModel() {
+@HiltViewModel
+class DetailsViewModel @Inject constructor(private val furryRepository: FurryRepository) : ViewModel() {
     private val _dogImageMutableStateFlow = MutableStateFlow<DetailsStateUi>(DetailsStateUi.Loading)
     val dogImageStateFlow: StateFlow<DetailsStateUi> = _dogImageMutableStateFlow
 
@@ -20,13 +21,11 @@ class DetailsViewModel : ViewModel() {
     }
 
     private fun getImageDetails(breedName: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val service = RetrofitSingleton.retrofit.create(FurryService::class.java)
+        viewModelScope.launch {
             try {
-                val response = service.getImagesByBreed(breed = breedName)
-                if (response.isSuccessful && response.body() != null) {
-                    _dogImageMutableStateFlow.value =
-                        DetailsStateUi.Success(imageUrl = response.body()?.message?.last().toString())
+                val response = furryRepository.getImagesByBreed(breedName = breedName)
+                if (response.isNotBlank()) {
+                    _dogImageMutableStateFlow.value = DetailsStateUi.Success(imageUrl = response)
                 } else {
                     _dogImageMutableStateFlow.value = DetailsStateUi.NoImagesForThatBreed
                 }

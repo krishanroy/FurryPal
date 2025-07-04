@@ -4,6 +4,7 @@ import android.widget.Toast
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.krishan.furrypal.ui.common.LoadingIndicator
@@ -11,7 +12,7 @@ import com.krishan.furrypal.ui.home.HomeViewModel
 
 @Composable
 fun HomeScreen(navController: NavHostController) {
-    val homeViewModel: HomeViewModel = viewModel()
+    val homeViewModel: HomeViewModel = hiltViewModel()
     val dogsResponse = homeViewModel.homeUiStateFlow.collectAsState().value
 
     if (dogsResponse.discoverFurryExpert.furryBreedNames?.isNotEmpty() == true) {

@@ -2,17 +2,18 @@ package com.krishan.furrypal.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.krishan.furrypal.data.remote.FurryService
-import com.krishan.furrypal.data.remote.RetrofitSingleton
-import kotlinx.coroutines.Dispatchers
+import com.krishan.furrypal.data.repo.FurryRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 import okio.IOException
 import java.net.NoRouteToHostException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
+@HiltViewModel
+class HomeViewModel @Inject constructor(private val furryRepository: FurryRepository) : ViewModel() {
     private val _homeUiMutableStateFlow = MutableStateFlow<HomeUiState>(HomeUiState())
     val homeUiStateFlow = _homeUiMutableStateFlow
 
@@ -21,16 +22,13 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun getHomeFurryResponse() {
-        val service = RetrofitSingleton.retrofit.create(FurryService::class.java)
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch {
             try {
-                val allDogBreedResponse = service.getAllBreeds()
+                val allDogBreedResponse = furryRepository.getAllBreeds()
                 _homeUiMutableStateFlow.value = _homeUiMutableStateFlow.value.copy(
                     discoverFurryExpert = DiscoverFurryExpertsUiState(
-                        furryBreedNames = if (allDogBreedResponse.isSuccessful && allDogBreedResponse.body() != null)
-                            allDogBreedResponse.body()?.message?.keys?.toList() else emptyList(),
-                        isLoading = false,
-                        isError = !(allDogBreedResponse.isSuccessful && allDogBreedResponse.body() != null)
+                        furryBreedNames = allDogBreedResponse,
+                        isLoading = false
                     )
                 )
             } catch (e: Exception) {
