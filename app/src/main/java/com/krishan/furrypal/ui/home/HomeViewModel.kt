@@ -5,6 +5,10 @@ import androidx.lifecycle.viewModelScope
 import com.krishan.furrypal.data.repo.FurryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import okio.IOException
 import java.net.NoRouteToHostException
@@ -14,12 +18,14 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(private val furryRepository: FurryRepository) : ViewModel() {
-    private val _homeUiMutableStateFlow = MutableStateFlow<HomeUiState>(HomeUiState())
-    val homeUiStateFlow = _homeUiMutableStateFlow
-
-    init {
+    private val _homeUiMutableStateFlow = MutableStateFlow(HomeUiState())
+    val homeUiStateFlow: StateFlow<HomeUiState> = _homeUiMutableStateFlow.onStart {
         getHomeFurryResponse()
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(stopTimeoutMillis = 5_000L),
+        initialValue = HomeUiState()
+    )
 
     private fun getHomeFurryResponse() {
         viewModelScope.launch {
